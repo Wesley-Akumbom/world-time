@@ -7,6 +7,7 @@ class WorldTime {
   late String time;
   String flag;
   String url;
+  late bool isDayTime; // true or false if daytime or not
 
   WorldTime({required this.location, required this.flag, required this.url});
 
@@ -21,6 +22,8 @@ class WorldTime {
       DateTime now = DateTime.parse(datetime);
       now = now.add(Duration(hours: int.parse(offset)));
 
+      // set the time property
+      isDayTime = now.hour > 6 && now.hour < 18 ? true : false;
       time = DateFormat.jm().format(now);
     }
     catch (e) {
